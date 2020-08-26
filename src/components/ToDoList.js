@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ToDoItem from './ToDoItem';
 import ToDoForm from './ToDoForm';
+import ToDoEmpty from './ToDoEmpty';
 
 const ToDoList = () => {
-  const initialState = [
-    'sleep',
-    'eat',
-    'coding',
-    'pee',
-  ]
+  const initialState = []
   const [tasks, setTasks] = useState(initialState);
 
   const deleteTask = (index) => {
@@ -18,15 +14,15 @@ const ToDoList = () => {
   };
 
   const addTask = (value) => {
-    // 新增 item...
     setTasks([ ...tasks, value ])
   };
 
   return (
     <div>
       {tasks.map((task, index) => (
-        <ToDoItem task={task} deleteTask={() => deleteTask(index)} />
+        <ToDoItem key={task} task={task} deleteTask={() => deleteTask(index)} />
       ))}
+      <ToDoEmpty />
       <ToDoForm addTask={addTask} />
     </div>
   );
